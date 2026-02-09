@@ -1,28 +1,28 @@
 import React from 'react'
 import Navbar from './components/Navbar'
-import { Route, useLocation, Routes } from 'react-router-dom'
-import Home from './Pages/Home';
-import Footer from './components/Footer';
-
+import { Route, Routes, useLocation } from 'react-router-dom'
+import Home from './Pages/Home'
+import Footer from './components/Footer'
+import AllRooms from './Pages/AllRooms'
 
 const App = () => {
-  const isOwnerPath = useLocation().pathname.includes("owner");
+  const location = useLocation();
+  const hideNavbar = location.pathname.startsWith("/owner");
 
   return (
-    <div>
+    <>
+      {!hideNavbar && <Navbar />}
 
-      {!isOwnerPath && <Navbar/ > }
-      <div className='min-h-[70vh]'>
+      <div className="min-h-[70vh] pt-24">
         <Routes>
-          <Route path='/' element = {<Home/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/rooms" element={<AllRooms />} />
         </Routes>
-
       </div>
 
-      <Footer />
-      
-    </div>
-  )
-}
+      {!hideNavbar && <Footer />}
+    </>
+  );
+};
 
-export default App
+export default App;
