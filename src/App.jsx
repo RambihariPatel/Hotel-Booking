@@ -5,26 +5,34 @@ import Home from './Pages/Home'
 import Footer from './components/Footer'
 import AllRooms from './Pages/AllRooms'
 import RoomDetails from './Pages/RoomDetails'
+import MyBooking from './Pages/MyBooking'
+import HotelReg from './components/HotelReg'
 
 const App = () => {
+
   const location = useLocation();
-  const hideNavbar = location.pathname.startsWith("/owner");
+  const isOwnerPath = location.pathname.includes("/owner");
 
   return (
     <>
-      {!hideNavbar && <Navbar />}
+      {!isOwnerPath && <Navbar />}
+
+      {false && <HotelReg />}
 
       <div className="min-h-[70vh]">
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/rooms" element={<AllRooms />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
+          <Route path="/my-bookings" element={<MyBooking />} />
+          
         </Routes>
       </div>
 
-      {!hideNavbar && <Footer />}
+      {!isOwnerPath && <Footer />}
     </>
   )
-};
+}
 
 export default App;
