@@ -7,6 +7,10 @@ import AllRooms from './Pages/AllRooms'
 import RoomDetails from './Pages/RoomDetails'
 import MyBooking from './Pages/MyBooking'
 import HotelReg from './components/HotelReg'
+import Layout from './Pages/hotelOwner/Layout'
+import Dashboard from './Pages/hotelOwner/Dashboard'
+import AddRoom from './Pages/hotelOwner/AddRoom'
+import ListRoom from './Pages/hotelOwner/ListRoom'
 
 const App = () => {
 
@@ -21,12 +25,27 @@ const App = () => {
 
       <div className="min-h-[70vh]">
         <Routes>
-          
+
+          {/* User Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/rooms" element={<AllRooms />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
           <Route path="/my-bookings" element={<MyBooking />} />
-          
+
+          {/* Owner Routes (Nested) */}
+          <Route path='/owner' element={<Layout />}>
+
+            {/* /owner */}
+            <Route index element={<Dashboard />} />
+
+            {/* /owner/add-room */}
+            <Route path='add-room' element={<AddRoom />} />
+
+            {/* /owner/list-room */}
+            <Route path='list-room' element={<ListRoom />} />
+
+          </Route>
+
         </Routes>
       </div>
 
@@ -35,4 +54,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
